@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acescrew | Эйс - Музыка из Vanadzor</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            background: linear-gradient(-45deg, #0f0f23, #1a1a3e, #2d1b69, #8b5cf6, #ec4899); 
+            background-size: 400% 400%; 
+            animation: gradientShift 15s ease infinite; 
+            color: #fff; 
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .star { position: absolute; background: #fff; border-radius: 50%; animation: twinkle 2s infinite; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(1); } 50% { opacity: 1; transform: scale(1.5); } }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; position: relative; z-index: 10; text-align: center; }
+
+        .hero { padding: 80px 0; }
+        .logo { 
+            font-family: 'Orbitron', monospace; 
+            font-size: clamp(2.5rem, 8vw, 6rem); 
+            font-weight: 900; 
+            background: linear-gradient(45deg, #ff6b35, #f7931e, #ffd23f, #ff6b35); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(255,107,53,0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes glow { from { filter: drop-shadow(0 0 10px #ff6b35); } to { filter: drop-shadow(0 0 30px #ff6b35); } }
+
+        .bio { 
+            font-size: clamp(1rem, 3vw, 1.3rem); 
+            line-height: 1.6; 
+            max-width: 800px; 
+            margin: 0 auto 60px; 
+            opacity: 0.95; 
+            background: rgba(255,255,255,0.1); 
+            backdrop-filter: blur(15px); 
+            padding: 30px; 
+            border-radius: 20px; 
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .bio strong { color: #ffd23f; }
+
+        .platforms { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin: 60px 0; }
+        .platform { 
+            background: rgba(255,255,255,0.15); 
+            backdrop-filter: blur(20px); 
+            border-radius: 25px; 
+            padding: 35px 25px; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            border: 1px solid rgba(255,255,255,0.3); 
+            position: relative; 
+            overflow: hidden;
+        }
+        .platform::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; left: 0; right: 0; 
+            height: 4px; 
+            background: linear-gradient(90deg, #ff6b35, #f7931e, #ffd23f); 
+        }
+        .platform:hover { 
+            transform: translateY(-15px) scale(1.02); 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4); 
+            border-color: #ff6b35;
+        }
+        .platform h3 { 
+            font-family: 'Orbitron', monospace; 
+            font-size: 1.6rem; 
+            margin-bottom: 15px; 
+            color: #ffd23f;
+        }
+        .platform a { 
+            display: block; 
+            color: #fff; 
+            text-decoration: none; 
+            font-size: 1.1rem; 
+            padding: 12px 20px; 
+            border-radius: 10px; 
+            background: rgba(255,255,255,0.1); 
+            transition: all 0.3s; 
+            margin-top: 10px;
+        }
+        .platform a:hover { background: rgba(255,107,53,0.3); color: #ffd23f; transform: scale(1.05); }
+
+        .subscribe { 
+            background: linear-gradient(135deg, rgba(255,107,53,0.3), rgba(247,147,30,0.3)); 
+            border: 2px solid #ff6b35; 
+            border-radius: 25px; 
+            padding: 50px 30px; 
+            margin: 80px 0; 
+            backdrop-filter: blur(20px);
+        }
+        .subscribe h2 { font-family: 'Orbitron', monospace; font-size: 2.2rem; margin-bottom: 25px; }
+        .subscribe-form { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        input[type="email"] { 
+            padding: 18px 25px; 
+            width: 320px; 
+            max-width: 100%; 
+            border: 2px solid rgba(255,255,255,0.4); 
+            border-radius: 15px; 
+            background: rgba(255,255,255,0.15); 
+            color: #fff; 
+            font-size: 1.1rem; 
+            backdrop-filter: blur(10px);
+        }
+        input[type="email"]::placeholder { color: rgba(255,255,255,0.7); }
+        button { 
+            padding: 18px 35px; 
+            background: linear-gradient(45deg, #ff6b35, #f7931e); 
+            color: #fff; 
+            border: none; 
+            border-radius: 15px; 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            font-family: 'Orbitron', monospace;
+        }
+        button:hover { transform: scale(1.1) translateY(-2px); box-shadow: 0 15px 30px rgba(255,107,53,0.4); }
+
+        @media (max-width: 768px) { 
+            .hero { padding: 50px 0; } 
+            .platforms { grid-template-columns: 1fr; } 
+            .subscribe-form { flex-direction: column; align-items: center; } 
+        }
+
+        .fire { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 3rem; animation: fireFlicker 1s infinite; }
+        @keyframes fireFlicker { 0%, 100% { opacity: 0.8; transform: translateX(-50%) rotate(-2deg); } 50% { opacity: 1; transform: translateX(-50%) rotate(2deg); } }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+
+    <div class="container">
+        <section class="hero">
+            <div class="fire">🔥</div>
+            <h1 class="logo">ACESCREW</h1>
+
+            <div class="bio">
+                <p>Привет, я acescrew (эйскрю), не отец крев, не оцескрев. Пою тут вам песни разные, люблю <strong>Alien Stage</strong>, <strong>Eve</strong>, <strong>Natori</strong>, <strong>Official Hige Dandism</strong>, <strong>Kenshi Yonezu</strong>, <strong>ДК (Даня Кашен)</strong> и ещё многое.</p>
+                <p>Моего персонажа зовут <strong>Эйс</strong> — к нему (и ко мне) можно так обращаться. Он полу-человек, поэтому на голове всегда видите огоньки, как у Oni. Его главная цель и мотивы пока скрыты, но когда-нибудь вы об этом узнаете.</p>
+            </div>
+        </section>
+
+        <section class="platforms">
+            <div class="platform">
+                <h3>🎵 Яндекс Музыка</h3>
+                <a href="https://music.yandex.ru/artist/21461957" target="_blank">Открыть альбомы</a>
+            </div>
+            <div class="platform">
+                <h3>💿 VK Музыка</h3>
+                <a href="https://vk.com/artist/acescrew" target="_blank">Открыть профиль</a>
+            </div>
+            <div class="platform">
+                <h3>🎧 Spotify</h3>
+                <a href="https://open.spotify.com/artist/7jNMFSbI5FnDbKazXecmkLz?si=FI_HHE32SGOwdMArkxJnhA" target="_blank">Слушать на Spotify</a>
+            </div>
+            <div class="platform">
+                <h3>▶️ YouTube Music</h3>
+                <a href="https://music.youtube.com/channel/UCPiFghQ5j6SJUYNuyUxRI4Q" target="_blank">Канал YouTube Music</a>
+            </div>
+            <div class="platform">
+                <h3>🔊 Звук</h3>
+                <a href="https://zvuk.com/artist/212913755" target="_blank">Открыть на Звуке</a>
+            </div>
+            <div class="platform">
+                <h3>🍎 Apple Music</h3>
+                <a href="https://music.apple.com/ca/artist/acescrew/1868703470" target="_blank">Apple Music</a>
+            </div>
+            <div class="platform tg">
+                <h3>💬 Telegram</h3>
+                <a href="https://t.me/acescrew" target="_blank">Подписаться в TG</a>
+            </div>
+        </section>
+
+        <section class="subscribe">
+            <h2>🔥 Подпишись на новости Эйса</h2>
+            <form class="subscribe-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <input type="email" name="email" placeholder="Введи свой email для обновлений" required>
+                <button type="submit">Я в теме! 🔥</button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        // Создаём звёздочки
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>
